@@ -10,6 +10,6 @@ __all__ = [
     '.generate_license_plate.LicensePlateGenerator',
 ]
 
-__version__ = '0.1.0'
+__version__ = '1.0.0'
 
 __description__ = '生成车牌图片数据'

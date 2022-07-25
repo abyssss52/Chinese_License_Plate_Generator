@@ -9,7 +9,7 @@ File generate_license_plate
 2 为车牌号产生车牌号图形：generate_chars_image
 3. 产生车牌底牌图片：generate_plate_template
 4. 加扰动元素进行数据增强，拼装底牌和车牌号图片： augment_image
-4. 保存图片
+5. 保存图片
 """
 import cv2
 import os
@@ -54,9 +54,13 @@ class LicensePlateGenerator(object):
             os.makedirs(save_path)
         prefix_len = 9  # 图片前缀位数，亿
         global plate_height
+        if plate_type in ['double_yellow', 'trailer']:
+            plate_height = 100
+        else:
+            plate_height = 64
         plate_width = int(chars_image_generator.plate_width * plate_height / chars_image_generator.plate_height)
         for index, char_image in enumerate(chars_images):
-            image_name = str(shift_index + index).zfill(prefix_len) + '_' + plate_nums[index] + '.jpg'
+            image_name = 'fake_' + str(shift_index + index).zfill(prefix_len) + '_' + plate_nums[index] + '.jpg'
             image_path = os.path.join(save_path, image_name)
             image = augmentation.augment(char_image)
             image = cv2.resize(image, (plate_width, plate_height))
@@ -68,13 +72,14 @@ class LicensePlateGenerator(object):
     
     
 if __name__ == '__main__':
-    plate_height = 72
+    plate_height = 64
     # 每个颜色的生成
-    blue_batch_size = 1400
-    yellow_batch_size = 300
-    new_energy_batch_size = 300
+    blue_batch_size = 100
+    yellow_batch_size = 100
+    new_energy_batch_size = 100
+    double_yellow_batch_size = 100
     # 迭代次数
-    iter_times = 10000
+    iter_times = 100
     # 保存文件夹名称
     file_path = os.path.join(os.getcwd(), 'plate_images')
     start_index = 0
@@ -94,7 +99,17 @@ if __name__ == '__main__':
                                                             save_path=file_path,
                                                             shift_index=start_index)
         start_index += yellow_batch_size
+        LicensePlateGenerator.generate_license_plate_images('double_yellow',
+                                                            batch_size=double_yellow_batch_size,
+                                                            save_path=file_path,
+                                                            shift_index=start_index)
+        start_index += double_yellow_batch_size
         LicensePlateGenerator.generate_license_plate_images('small_new_energy',
+                                                            batch_size=new_energy_batch_size,
+                                                            save_path=file_path,
+                                                            shift_index=start_index)
+        start_index += new_energy_batch_size
+        LicensePlateGenerator.generate_license_plate_images('big_new_energy',
                                                             batch_size=new_energy_batch_size,
                                                             save_path=file_path,
                                                             shift_index=start_index)

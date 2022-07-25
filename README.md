@@ -1,6 +1,7 @@
 # 中国车牌生成
 @author **郑煜伟** in 2019-04-18  
-目前支持蓝色标准车牌，黄色标准车牌，小型新能源车牌的车牌生成。  
+@update night in 2022-07-21  
+目前支持蓝色标准车牌，黄色单行车牌，黄色双行车牌，小型新能源车牌，大型新能源车牌的车牌生成。（挂车车牌完成部分）  
 实际的车牌示例：  
 ![实际的大型新能源车牌示例](https://github.com/zheng-yuwei/license-plate-generator/blob/master/images/%E5%A4%A7%E5%9E%8B%E6%96%B0%E8%83%BD%E6%BA%90%E8%BD%A6%E7%89%8C%E5%8F%B7-%E7%A4%BA%E4%BE%8B.jpg)
 ![实际的小型新能源车牌示例](https://github.com/zheng-yuwei/license-plate-generator/blob/master/images/%E5%B0%8F%E5%9E%8B%E6%96%B0%E8%83%BD%E6%BA%90%E8%BD%A6%E7%89%8C%E5%8F%B7-%E7%A4%BA%E4%BE%8B.jpg)  

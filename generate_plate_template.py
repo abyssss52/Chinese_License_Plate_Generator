@@ -9,9 +9,11 @@ import cv2
 
 class LicensePlateImageGenerator(object):
     """ 根据车牌类型和车牌号，生成车牌图片 """
-    single_blue_plate_bg = './images/single_blue1.bmp'
+    single_blue1_plate_bg = './images/single_blue1.bmp'
     small_new_energy_plate_bg = './images/small_new_energy.jpg'
+    big_new_energy_plate_bg = './images/big_new_energy1.bmp'
     single_yellow1_plate_bg = './images/single_yellow1.bmp'
+    double_yellow1_plate_bg = './images/double_yellow3.bmp'
     police1_plate_bg = './images/police1.bmp'
     
     def __init__(self, plate_type):
@@ -19,13 +21,19 @@ class LicensePlateImageGenerator(object):
         self.plate_type = plate_type
         
         if plate_type == 'single_blue':
-            plate_image = cv2.imread(LicensePlateImageGenerator.single_blue_plate_bg)
+            plate_image = cv2.imread(LicensePlateImageGenerator.single_blue1_plate_bg)
         elif plate_type == 'small_new_energy':
             plate_image = cv2.imread(LicensePlateImageGenerator.small_new_energy_plate_bg)
+        elif plate_type == 'big_new_energy':
+            plate_image = cv2.imread(LicensePlateImageGenerator.big_new_energy_plate_bg)
         elif plate_type == 'single_yellow':
             plate_image = cv2.imread(LicensePlateImageGenerator.single_yellow1_plate_bg)
+        elif plate_type == 'double_yellow':
+            plate_image = cv2.imread(LicensePlateImageGenerator.double_yellow1_plate_bg)
         elif plate_type == 'police':
             plate_image = cv2.imread(LicensePlateImageGenerator.police1_plate_bg)
+        elif plate_type == 'trailer':
+            plate_image = cv2.imread(LicensePlateImageGenerator.double_yellow1_plate_bg)
         else:
             raise ValueError('该类型车牌目前功能尚未完成！')
             

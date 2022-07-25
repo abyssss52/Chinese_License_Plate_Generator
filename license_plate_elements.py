@@ -74,8 +74,8 @@ class LicensePlateElements(object):
         'single_blue': 0, 'single_yellow': 1, 'double_yellow': 2, 'police': 3, 'learner': 4,
         'hk': 5, 'macau': 6, 'single_army': 7, 'double_army': 8, 'consulate': 9,
         'embassy': 10, 'army_police': 11, 'double_army_police': 12, 'small_new_energy': 13, 'big_new_energy': 14,
-        'factory': 15, 'single_black': 16, 'other': 17,
-    }
+        'factory': 15, 'single_black': 16, 'trailer': 17,
+    }    # 'other': 17
     
     # 车牌颜色
     plate_color_indices = {'blue': 0, 'yellow': 1, 'green': 2, 'white': 3, 'black': 4, 'other': 5, }

@@ -30,7 +30,7 @@ class ImageAugmentation(object):
         if plate_type == 'single_blue':
             # 字符为白色
             self.is_black_char = False
-        elif plate_type in ['single_yellow', 'small_new_energy']:
+        elif plate_type in ['single_yellow', 'small_new_energy', 'double_yellow', 'big_new_energy', 'trailer']:
             # 字符为黑字
             self.is_black_char = True
         else:
@@ -362,27 +362,29 @@ class ImageAugmentation(object):
         if not self.is_black_char:
             img = cv2.bitwise_or(img, self.template_image)
             # 基于视角的变换
-            img = self.sight_transfer([img], horizontal_sight_direction, vertical_sight_direction)
-            img = img[0]
+            # img = self.sight_transfer([img], horizontal_sight_direction, vertical_sight_direction)
+            # img = img[0]
             # 加上随机透视变换，这个其实可以不用
-            img, _, _ = self.rand_perspective_transfer(img)
+            # img, _, _ = self.rand_perspective_transfer(img)
             img = self.rand_environment(img)
-            img = self.rand_hsv(img)
+            # img = self.rand_hsv(img)
         else:
             # 对文字和底牌进行一样的透视操作
-            img, template_image = self.sight_transfer([img, self.template_image],
-                                                      horizontal_sight_direction, vertical_sight_direction)
-            img, matrix, size = self.rand_perspective_transfer(img)
-            template_image = cv2.warpPerspective(template_image, matrix, size)
+            # img, template_image = self.sight_transfer([img, self.template_image],
+            #                                           horizontal_sight_direction, vertical_sight_direction)
+            # img, matrix, size = self.rand_perspective_transfer(img)
+            # template_image = cv2.warpPerspective(template_image, matrix, size)
             # 底牌加背景
-            template_image = self.rand_environment(template_image)
+            # template_image = self.rand_environment(template_image)
+            template_image = self.rand_environment(self.template_image)
             # 转为白底黑字
             img = cv2.bitwise_not(img)
             # 底牌加车牌文字
             img = cv2.bitwise_and(img, template_image)
-            img = self.rand_hsv(img)
-        
-        img = self.add_gauss(img)
-        img = self.add_noise(img)
-        img = self.add_smudge(img)
+            # img = self.rand_hsv(img)
+
+        # 暂不需要
+        # img = self.add_gauss(img)
+        # img = self.add_noise(img)
+        # img = self.add_smudge(img)
         return img
